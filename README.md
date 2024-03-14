@@ -4,13 +4,17 @@
 
 ### 1.1. Prepare your dev environment
 
+> GET READY TO...<br> > &bull; Install any tools that you will use to build your Astro website
+
 Get the dev tools you need:
 
-* terminal
-* Node.js (version v18.14.1 or later)
-* VS Code Editor
+- terminal
+- Node.js (version v18.14.1 or later)
+- VS Code Editor
 
 ### 1.2. Create your first Astro project
+
+> GET READY TO...<br> > &bull; Run the `create astro` setup wizard to create a new Astro project<br> > &bull; Start the Astro server in development (dev) mode<br> > &bull; View a live preview of your website in your browser
 
 #### Launch the Astro setup wizard
 
@@ -26,6 +30,7 @@ Get the dev tools you need:
 `code ./astro-tut1-build-a-blog`
 
 #### Run Astro in dev mode (start the dev server)
+
 `npm run dev`
 
 #### View a preview of your website
@@ -34,19 +39,26 @@ Get the dev tools you need:
 
 ### 1.3. Write your first line of Astro
 
+> GET READY TO...<br> > &bull; Make your first edit to your new website
+
 #### Edit your home page
 
-Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
+Replace <s>`<h1>Astro</h1>`</s> with `<h1>My Astro Site</h1>`
+
 </body>
 ```
 
 ### 1.4. Store your repository online
+
+> GET READY TO...<br> > &bull; Put your project repository online
 
 #### Create a repository on GitHub
 
 #### Commit your local code to GitHub
 
 ### 1.5. Deploy your site to the web
+
+> GET READY TO...<br> > &bull; Add your GitHub repository as a new Netlify app<br> > &bull; Deploy your Astro site to the web
 
 #### Create a new Netlify site
 
@@ -62,6 +74,8 @@ Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
 
 ### 2.1. Create your first Astro page
 
+> GET READY TO...<br> > &bull; Create two new pages on your website: About and Blog<br> > &bull; Add navigation links to your pages<br> > &bull; Deploy an updated version of your website to the web<br>
+
 #### Create a new `.astro` file
 
 1. In `src/pages/`, add `about.astro`
@@ -71,6 +85,7 @@ Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
 #### Edit your page
 
 Replace:
+
 ```html
 <body>
   <h1>My Astro Site</h1>
@@ -78,14 +93,21 @@ Replace:
 ```
 
 With:
+
 ```html
 <body>
   <h1>About Me</h1>
   <h2>... and my new Astro site!</h2>
 
-  <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page
+    on my website, and it's the first one I built myself!
+  </p>
 
-  <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking
+    back and see how my journey is going!
+  </p>
 </body>
 ```
 
@@ -94,26 +116,27 @@ With:
 Add at the top of pages `index.astro` and `about.astro`:
 
 ```html
-<a href="/">Home</a>
-<a href="/about/">About</a>
+<a href="/">Home</a> <a href="/about/">About</a>
 ```
 
 #### Add a blog page
 
 ```html
 <body>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
+  <a href="/">Home</a>
+  <a href="/about/">About</a>
+  <a href="/blog/">Blog</a>
 
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-  </body>
+  <h1>My Astro Learning Blog</h1>
+  <p>This is where I will post about my journey learning Astro.</p>
+</body>
 ```
 
 #### Publish your changes to the web
 
 ### 2.2. Write your first Markdown blog post
+
+> GET READY TO...<br> > &bull; Make a new folder and create a new post<br> > &bull; Write some Markdown content<br> > &bull; Link to your blog posts on your Blog page<br>
 
 #### Create your first .md file
 
@@ -123,13 +146,13 @@ Create `src/pages/posts/post-1-md` and test `http://localhost:4321/posts/post-1`
 
 ```md
 ---
-title: 'My First Blog Post'
+title: "My First Blog Post"
 pubDate: 2022-07-01
-description: 'This is the first post of my new Astro blog.'
-author: 'Astro Learner'
+description: "This is the first post of my new Astro blog."
+author: "Astro Learner"
 image:
-    url: 'https://docs.astro.build/assets/full-logo-light.png'
-    alt: 'The full Astro logo.'
+  url: "https://docs.astro.build/assets/full-logo-light.png"
+  alt: "The full Astro logo."
 tags: ["astro", "blogging", "learning in public"]
 ---
 
@@ -159,9 +182,10 @@ I will finish the Astro tutorial, and then keep adding more posts. Watch this sp
 ```html
 ---
 ---
+
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Astro</title>
   </head>
@@ -181,11 +205,13 @@ I will finish the Astro tutorial, and then keep adding more posts. Watch this sp
 
 ### 2.3. Add dynamic content about you
 
+> GET READY TO...<br> > &bull; Define your page title in frontmatter, and use it in your HTML<br> > &bull; Conditionally display HTML elements<br> > &bull; Add some content about you<br>
+
 #### Define and use a variable
 
 In `src/pages/about.astro` add the variable `pageTitle` between the code fences and use it with curly braces in the body:
 
-```astro
+```jsx
 ---
 const pageTitle = "About Me";
 ---
@@ -223,7 +249,7 @@ const pageTitle = "About Me";
 
 1. In `src/pages/about.astro` add the following code between the code fences, below your existing content:
 
-```astro
+```jsx
 const identity = {
   firstName: "Sarah",
   country: "Canada",
@@ -236,7 +262,7 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 
 2. In the same page add the following code in your HTML template, below your existing content:
 
-```astro
+```jsx
 <p>Here are a few facts about me:</p>
 <ul>
   <li>My name is {identity.firstName}.</li>
@@ -277,11 +303,114 @@ Then, check the live preview in your browser tab to see what is displayed on the
 
 3. Commit your changes to GitHub before moving on.
 
+### 2.4. Style your About page
 
-#### 
+> GET READY TO...<br> > &bull; Style items on a single page<br> > &bull; Use CSS variables
+
+#### Style an individual page
+
+Using Astro’s own <style></style> tags, you can style items on your page. Adding attributes and directives to these tags gives you even more ways to style.
+
+1. Copy the following `<style>` code and paste it into `src/pages/about.astro`:
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <style>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+
+      .skill {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+</html>
+```
+
+2. Add the class name `skill` to the generated `<li>` elements on your About page, so you can style them. Your code should now look like this:
 
 ```astro
+<p>My skills are:</p>
+<ul>
+  {skills.map((skill) => <li class="skill">{skill}</li>)}
+</ul>
 ```
+
+3. Add the `skill` class code to your existing style tag:
+
+```astro
+<style>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: green;
+    font-weight: bold;
+  }
+</style>
+```
+
+4. Visit your About page in your browser again, and verify, through visual inspection or dev tools, that each item in your list of skills is now green and bold.
+
+#### Use your first CSS variable
+
+The Astro `<style>` tag can also reference any variables from your frontmatter script using the `define:vars={ {...} }` directive. You can **define variables within your code fence**, then **use them as CSS variables in your style tag**.
+
+1. Define a `skillColor` variable by adding it to the frontmatter script of `src/pages/about.astro` like this:
+
+```astro
+---
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Sarah",
+  country: "Canada",
+  occupation: "Technical Writer",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "navy";
+---
+```
+
+2. Update your existing `<style>` tag below to first define, then use this `skillColor` variable inside double curly braces.
+
+```astro
+<style define:vars={{skillColor}}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: bold;
+  }
+</style>
+```
+
+3. Check your About page in your browser preview. You should see that the skills are now navy blue, as set by the `skillColor` variable passed to the `define:vars` directive.
+
+
+####
+
+```astro
+
+```
+
 ---
 
 ## 3. Build and design with Astro UI components
