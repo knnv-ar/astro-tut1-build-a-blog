@@ -179,10 +179,108 @@ I will finish the Astro tutorial, and then keep adding more posts. Watch this sp
 </html>
 ```
 
+### 2.3. Add dynamic content about you
+
+#### Define and use a variable
+
+In `src/pages/about.astro` add the variable `pageTitle` between the code fences and use it with curly braces in the body:
+
+```astro
+---
+const pageTitle = "About Me";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
+
+    <h1>{pageTitle}</h1>
+    <h2>... and my new Astro site!</h2>
+
+    <p>
+      I am working through Astro's introductory tutorial. This is the second
+      page on my website, and it's the first one I built myself!
+    </p>
+
+    <p>
+      This site will update as I complete more of the tutorial, so keep checking
+      back and see how my journey is going!
+    </p>
+  </body>
+</html>
+```
+
+#### Write JavaScript expressions in Astro
+
+1. In `src/pages/about.astro` add the following code between the code fences, below your existing content:
+
+```astro
+const identity = {
+  firstName: "Sarah",
+  country: "Canada",
+  occupation: "Technical Writer",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+```
+
+2. In the same page add the following code in your HTML template, below your existing content:
+
+```astro
+<p>Here are a few facts about me:</p>
+<ul>
+  <li>My name is {identity.firstName}.</li>
+  <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+  {identity.hobbies.length >= 2 &&
+    <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+  }
+</ul>
+<p>My skills are:</p>
+<ul>
+  {skills.map((skill) => <li>{skill}</li>)}
+</ul>
+```
+
+#### Conditionally render elements
+
+You can also use your script variables to choose **whether or not** to render individual elements of your HTML `<body>` content.
+
+1. Add the following lines to your frontmatter script to **define variables**, below your existing content:
+
+```js
+const happy = true;
+const finished = false;
+const goal = 3;
+```
+
+2. Add the following lines below your existing paragraphs.
+
+```astro
+{happy && <p>I am happy to be learning Astro!</p>}
+
+{finished && <p>I finished this tutorial!</p>}
+
+{goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+```
+
+Then, check the live preview in your browser tab to see what is displayed on the page:
+
+3. Commit your changes to GitHub before moving on.
+
 
 #### 
 
-```html
+```astro
 ```
 ---
 
