@@ -305,7 +305,9 @@ Then, check the live preview in your browser tab to see what is displayed on the
 
 ### 2.4. Style your About page
 
-> GET READY TO...<br> > &bull; Style items on a single page<br> > &bull; Use CSS variables
+> GET READY TO...<br>
+&bull; Style items on a single page<br>
+&bull; Use CSS variables
 
 #### Style an individual page
 
@@ -404,11 +406,74 @@ const skillColor = "navy";
 
 3. Check your About page in your browser preview. You should see that the skills are now navy blue, as set by the `skillColor` variable passed to the `define:vars` directive.
 
+### 2.5. Add site-wide styling
+
+> GET READY TO...<br>
+&bull; Apply styles globally
+
+#### Add a global stylesheet
+
+1. Create a new file at the location `src/styles/global.css` (You’ll have to create a `styles` folder first.)
+
+2. Copy the following code into your new file, `global.css`:
+
+```css
+html {
+  background-color: #f1f5f9;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
+```
+
+3. In `about.astro`, add the following import statement to your frontmatter:
+
+```astro
+---
+import '../styles/global.css';
+
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Sarah",
+  country: "Canada",
+  occupation: "Technical Writer",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+```
+
+
+
 
 ####
 
 ```astro
-
 ```
 
 ---
