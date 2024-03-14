@@ -46,11 +46,19 @@ Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
 
 #### Commit your local code to GitHub
 
+### 1.5. Deploy your site to the web
 
+#### Create a new Netlify site
 
-#### 
+1. Go to: https://netlify.com/ and make a note of your username: `https://app.netlify.com/teams/knnv-ar/`
+2. Click `Add new site > Import an existing project`, then choose your Astro project’s GitHub repository from the list provided.
+3. At the final step, Netlify will show you your app’s site settings. The defaults should be correct for your Astro project, so you can scroll down and click `Deploy site`.
+
+#### Change your project name
+
+#### Visit your new website
+
 ---
-
 ## 2. Add, style and link to pages on your site
 
 ## 3. Build and design with Astro UI components
