@@ -58,8 +58,67 @@ Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
 
 #### Visit your new website
 
----
 ## 2. Add, style and link to pages on your site
+
+### 2.1. Create your first Astro page
+
+#### Create a new `.astro` file
+
+1. In `src/pages/`, add `about.astro`
+2. Copy, or retype the contents of `index.astro` into your new `about.astro` file.
+3. Test `http://localhost:4321/about`
+
+#### Edit your page
+
+Replace:
+```html
+<body>
+  <h1>My Astro Site</h1>
+</body>
+```
+
+With:
+```html
+<body>
+  <h1>About Me</h1>
+  <h2>... and my new Astro site!</h2>
+
+  <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+
+  <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+</body>
+```
+
+#### Add navigation links
+
+Add at the top of pages `index.astro` and `about.astro`:
+
+```html
+<a href="/">Home</a>
+<a href="/about/">About</a>
+```
+
+#### Add a blog page
+
+```html
+<body>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
+
+    <h1>My Astro Learning Blog</h1>
+    <p>This is where I will post about my journey learning Astro.</p>
+  </body>
+```
+
+#### Publish your changes to the web
+
+
+#### 
+
+```html
+```
+---
 
 ## 3. Build and design with Astro UI components
 
