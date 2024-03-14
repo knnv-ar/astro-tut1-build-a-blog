@@ -1,4 +1,4 @@
-# Tutorial oficial: Build a Blog
+# Astro.build official tutorial: Build a Blog
 
 ## 1. Create and deploy your first Astro site
 
@@ -36,8 +36,19 @@ Get the dev tools you need:
 
 #### Edit your home page
 
+Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
+</body>
+```
+
+### 1.4. Store your repository online
+
+#### Create a repository on GitHub
+
+#### Commit your local code to GitHub
 
 
+
+#### 
 ---
 
 ## 2. Add, style and link to pages on your site
