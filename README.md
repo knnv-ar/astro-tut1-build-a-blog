@@ -1,6 +1,6 @@
 # Astro.build official tutorial: Build a Blog
 
-## 1. Create and deploy your first Astro site
+## Unit 1 - Setup: create and deploy your first Astro site
 
 ### 1.1. Prepare your dev environment
 
@@ -58,7 +58,7 @@ Replace <s>`<h1>Astro</h1>`</s>  with `<h1>My Astro Site</h1>`
 
 #### Visit your new website
 
-## 2. Add, style and link to pages on your site
+## Unit 2 - Pages: add, style and link to pages on your site
 
 ### 2.1. Create your first Astro page
 
@@ -112,6 +112,72 @@ Add at the top of pages `index.astro` and `about.astro`:
 ```
 
 #### Publish your changes to the web
+
+### 2.2. Write your first Markdown blog post
+
+#### Create your first .md file
+
+Create `src/pages/posts/post-1-md` and test `http://localhost:4321/posts/post-1`
+
+#### Write Markdown content
+
+```md
+---
+title: 'My First Blog Post'
+pubDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
+author: 'Astro Learner'
+image:
+    url: 'https://docs.astro.build/assets/full-logo-light.png'
+    alt: 'The full Astro logo.'
+tags: ["astro", "blogging", "learning in public"]
+---
+
+# My First Blog Post
+
+Published on: 2022-07-01
+
+Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
+
+## What I've accomplished
+
+1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
+
+2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
+
+3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
+
+## What's next
+
+I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+```
+
+#### Link to your posts
+
+1. Link to your first post with an anchor tag in `src/pages/blog.astro`:
+
+```html
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width" />
+    <title>Astro</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
+
+    <h1>My Astro Learning Blog</h1>
+    <p>This is where I will post about my journey learning Astro.</p>
+    <ul>
+      <li><a href="/posts/post-1/">Post 1</a></li>
+    </ul>
+  </body>
+</html>
+```
 
 
 #### 
