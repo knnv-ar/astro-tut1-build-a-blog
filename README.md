@@ -952,7 +952,7 @@ Adding a `<script>` tag provides client-side JavaScript to “listen” for a us
 
 #### Importing a `.js` file
 
-Instead of writing your JavaScript directly on each page, you can move the contents of your <script> tag into its own .js file in your project.
+Instead of writing your JavaScript directly on each page, you can move the contents of your `<script>` tag into its own `.js` file in your project.
 
 1. Create `src/scripts/menu.js` (you will have to create a new `/scripts/` folder) and move your JavaScript into it.
 
@@ -986,8 +986,9 @@ document.querySelector('.hamburger').addEventListener('click', () => {
 
 > IMPORTANT: **The JavaScript in a `<script>` tag is sent to the browser**, and is available to run, based on user interactions like refreshing a page or toggling an input.
 
+## 4. Save time and energy with reusable page layouts
 
-
+CONTINUAR EN: https://docs.astro.build/en/tutorial/4-layouts/
 
 ####
 
@@ -1001,7 +1002,6 @@ document.querySelector('.hamburger').addEventListener('click', () => {
 ---
 
 
-## 4. Save time and energy with reusable page layouts
 
 ## 5. Beef up your blog
 
