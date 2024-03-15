@@ -1244,6 +1244,64 @@ const { frontmatter } = Astro.props;
 <slot />
 ```
 
+### 4.3 Combine layouts to get the best of both worlds
+
+Now that you have added a layout to each blog post, it’s time to make your posts look like the rest of the pages on your website!
+
+> GET READY TO...<br>
+&bull; Nest your blog post layout inside your main page layout
+
+#### Nest your two layouts
+
+You already have a `BaseLayout.astro` for defining the overall layout of your pages.
+
+`MarkdownPostLayout.astro` gives you some additional templating for common blog post properties such as `title` and `date`, but your blog posts don’t look like the other pages on your site. You can match the look of your blog posts to the rest of your site by `nesting layouts`.
+
+1. In `src/layouts/MarkdownPostLayout.astro`, import `BaseLayout.astro` and use it to wrap the entire template content. Don’t forget to pass the `pageTitle` prop:
+
+```jsx
+---
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>
+  <h1>{frontmatter.title}</h1>
+  <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
+  <p><em>{frontmatter.description}</em></p>
+  <p>Written by: {frontmatter.author}</p>
+  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  <slot />
+</BaseLayout>
+```
+
+2. Check your browser **preview at http**://localhost:4321/posts/post-1. Now you should see **content **rendered by**:
+
+  - Your **main page layout**, including your styles, navigation links, and social footer.
+  - Your **blog post layout**, including frontmatter properties like the description, date, title, and image.
+  - Your **individual blog post Markdown content**, including just the text written in this post.
+
+3. Notice that your page title is now displayed twice, once by each layout.
+
+Remove the line that displays your page title from `MarkdownPostLayout.astro`:
+
+Remove:
+
+```jsx
+<h1>{frontmatter.title}</h1>
+```
+
+4. Check your browser preview again at http://localhost:4321/posts/post-1 and verify that this line is no longer displayed and that your title is only displayed once. Make any other adjustments necessary to ensure that you do not have any duplicated content.
+
+Make sure that:
+
+- Each blog post shows the same page template, and no content is missing. (If one of your blog posts is missing content, check its frontmatter properties.) 
+- No content is duplicated on a page. (If something is being rendered twice, then be sure to remove it from `MarkdownPostLayout.astro`.)
+
+If you’d like to customize your page template, you can.
+
+CONTINUAR EN: https://docs.astro.build/en/tutorial/5-astro-api/s
+
+
 
 #### 
 
@@ -1256,7 +1314,6 @@ const { frontmatter } = Astro.props;
 &bull; x
 
 
-CONTINUAR EN: https://docs.astro.build/en/tutorial/4-layouts/
 
 Build your first layout
 Create and pass data to a custom blog layout
