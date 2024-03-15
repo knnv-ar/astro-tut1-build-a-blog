@@ -1,5 +1,48 @@
 # Astro.build official tutorial: Build a Blog
 
+**Index**
+
+UNIT 1 - SETUP
+
+1.1. Prepare dev environment
+
+-Terminal
+-Node.js
+-VS Code
+
+-GitHub account
+-Netlify account
+
+1.2. Launch astro setup wizard
+1.3. Write your first line of Astro
+1.4. Store your repository online 
+1.5. Deploy your site to the web
+
+UNIT 2 - PAGES
+
+2.1. Create your first Astro page
+2.2. Write your first Markdown blog post
+2.3. Add dynamic content about you
+2.4. Style your About page
+2.5. Add site-wide styling
+
+UNIT 3 - COMPONENTS
+
+3.1. Make a reusable Navigation component
+3.2. Create a social media footer
+3.3. Build it yourself - Header
+3.4. Send your first script to the browser
+
+UNIT 4 - LAYOUTS
+
+4.1. Build your first layout
+4.2. Create and pass data to a custom blog layout
+4.3. Combine layouts to get the best of both worlds
+
+
+
+---
+
 ## Unit 1 - Setup: create and deploy your first Astro site
 
 ### 1.1. Prepare your dev environment
@@ -988,7 +1031,136 @@ document.querySelector('.hamburger').addEventListener('click', () => {
 
 ## 4. Save time and energy with reusable page layouts
 
-CONTINUAR EN: https://docs.astro.build/en/tutorial/4-layouts/
+Now that you can build with components, it’s time to create some custom layouts!
+
+### Looking ahead
+
+In this unit, you’ll build layouts to share common elements and styles across your pages and blog posts.
+
+To do this, you will:
+
+- Create reusable layout components
+- Pass content to your layouts with `<slot />`
+- Pass data from Markdown frontmatter to your layouts
+- Nest multiple layouts
+
+### 4.1. Build your first layout
+
+> GET READY TO...<br>
+&bull; Refactor common elements into a page layout<br>
+&bull; Use an Astro `<slot />` element to place page contents within a layout<br>
+&bull; Pass page-specific values as props to its layout
+
+You still have some Astro components repeatedly rendered on every page. It’s time to refactor again to create a shared page layout!
+
+#### Create your first layout component
+
+1. Create a new file at the location `src/layouts/BaseLayout.astro`. (You will need to create a new `layouts` folder first.)
+
+2. Copy the entire contents of `index.astro` into your new file, `BaseLayout.astro`.
+
+```jsx
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+const pageTitle = "Home Page";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <h1>{pageTitle}</h1>
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+    </script>
+  </body>
+</html>
+```
+
+#### Use your layout on a page
+
+3. Replace the code at `src/pages/index.astro` with the following:
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "Home Page";
+---
+<BaseLayout>
+  <h2>My awesome blog subtitle</h2>
+</BaseLayout>
+```
+
+4. Check the browser preview again to notice what did (or, spoiler alert: did not!) change.
+
+5. Add a `<slot />` element to `src/layouts/BaseLayout.astro` just above the footer component, then check the browser preview of your Home page and notice what really did change this time!
+
+```jsx
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+const pageTitle = "Home Page";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <h1>{pageTitle}</h1>
+    <slot />
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+    </script>
+  </body>
+</html>
+```
+
+The `<slot />` allows you to inject (or “slot in”) child content written between opening and closing `<Component></Component>` tags to any `Component.astro` file.
+
+#### Pass page-specific values as props
+
+1. Pass the page title to your layout component from `index.astro` using a component attribute:
+
+```astro
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "Home Page";
+---
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+</BaseLayout>
+```
+
+2. Change the script of your `BaseLayout.astro` layout component to receive a page title via `Astro.props` instead of defining it as a constant.
+
+Replace:
+
+```jsx
+const pageTitle = "Home Page";
+```
+
+With:
+
+```jsx
+const { pageTitle } = Astro.props;
+```
+
+3. Check your browser preview to verify that your page title has not changed. It has the same value, but is now being rendered dynamically. And now, each individual page can specify its own title to the layout.
 
 ####
 
@@ -999,10 +1171,16 @@ CONTINUAR EN: https://docs.astro.build/en/tutorial/4-layouts/
 &bull; x<br>
 &bull; x<br>
 &bull; x
+
+
+CONTINUAR EN: https://docs.astro.build/en/tutorial/4-layouts/
+
+Build your first layout
+Create and pass data to a custom blog layout
+Combine layouts to get the best of both worlds
+
+
 ---
-
-
-
 ## 5. Beef up your blog
 
 ## 6. Set sail for Astro islands
