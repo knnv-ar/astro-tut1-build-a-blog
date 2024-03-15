@@ -1177,7 +1177,48 @@ Don’t forget to:
   - CSS rules in a `<style>` tag (e.g. `<h1>` in your About page)
   - `<script>` tags
 
+### 4.2 Create and pass data to a custom blog layout
 
+> GET READY TO...<br>
+&bull; Create a new blog post layout for your Markdown files<br>
+&bull; Pass YAML frontmatter values as props to layout component
+
+#### Add a layout to your blog posts
+
+When you include the `layout` frontmatter property in an `.md` file, all of your frontmatter YAML values are available to the layout file.
+
+1. Create a new file at `src/layouts/MarkdownPostLayout.astro`
+
+2. Copy the following code into `MarkdownPostLayout.astro`
+
+```jsx
+---
+const { frontmatter } = Astro.props;
+---
+<h1>{frontmatter.title}</h1>
+<p>Written by {frontmatter.author}</p>
+<slot />
+```
+
+3. Add the following frontmatter property in `post-1.md`
+
+```jsx
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'My First Blog Post'
+pubDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
+author: 'Astro Learner'
+image:
+    url: 'https://docs.astro.build/assets/full-logo-light.png'
+    alt: 'The full Astro logo.'
+tags: ["astro", "blogging", "learning in public"]
+---
+```
+
+4. Check your browser preview again at http://localhost:4321/posts/post-1 and notice what the layout has added to your page.
+
+5. Add the same layout property to your two other blog posts `post-2.md` and `post-3.md`. Verify in your browser that your layout is also applied to these posts.
 
 
 
