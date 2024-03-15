@@ -1162,7 +1162,27 @@ const { pageTitle } = Astro.props;
 
 3. Check your browser preview to verify that your page title has not changed. It has the same value, but is now being rendered dynamically. And now, each individual page can specify its own title to the layout.
 
-####
+#### Try it yourself - Use your layout everywhere
+
+**Refactor** your other pages (`blog.astro` and `about.astro`) so that they use your new `<BaseLayout>` component to render the common page elements.
+
+Don’t forget to:
+
+- Pass a page title as props via a component attribute.
+- Let the layout be responsible for the HTML rendering of any common elements.
+- Delete anything from each page that that page is no longer responsible for rendering, because it is being handled by the layout, including:
+
+  - HTML elements
+  - Components and their imports
+  - CSS rules in a `<style>` tag (e.g. `<h1>` in your About page)
+  - `<script>` tags
+
+
+
+
+
+
+#### 
 
 ```astro
 ```
