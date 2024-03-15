@@ -1220,7 +1220,29 @@ tags: ["astro", "blogging", "learning in public"]
 
 5. Add the same layout property to your two other blog posts `post-2.md` and `post-3.md`. Verify in your browser that your layout is also applied to these posts.
 
+#### Try it yourself - Customize your blog post layout
 
+**Challenge**: Identify items common to every blog post, and use `MarkdownPostLayout.astro` to render them, instead of writing them in your Markdown in `post-1.md` and in every future blog post.
+
+Here’s an example of refactoring your code to include the `pubDate` in the layout component instead of writing it in the body of your Markdown:
+
+Delete in `post-1.md`:
+
+```jsx
+Published on: 2022-07-01
+```
+
+Add in `src/layouts/MarkdownPostLayout.astro`:
+
+```jsx
+---
+const { frontmatter } = Astro.props;
+---
+<h1>{frontmatter.title}</h1>
+<p>Published on: {frontmatter.pubDate.toString().slice(0,10)}</p>
+<p>Written by {frontmatter.author}</p>
+<slot />
+```
 
 
 #### 
