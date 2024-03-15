@@ -830,6 +830,161 @@ h1 {
 
 Resize your window and look for different styles being applied at different screen widths. Your header is now **responsive** to screen size through the use of `@media` queries.
 
+### 3.4. Send your first script to the browser
+
+Let’s add a hamburger menu to open and close your links on mobile screen sizes, requiring some client-side interactivity!
+
+> GET READY TO...<br>
+&bull; Create a hamburger menu component<br>
+&bull; Write a `<script>` to allow your site visitors to open and close the navigation menu<br>
+&bull; Move your JavaScript to its `.js` file
+
+#### Build a Hamburger component
+
+Create a `<Hamburger />` component to open and close your mobile menu.
+
+1. Create a file named `Hamburger.astro` in `src/components/`
+
+2. Copy the following code into your component. This will represent your 3-line “hamburger” menu to open and close your navigation links on mobile. (You will add the new CSS styles to `global.css` later.)
+
+3. Place this new `<Hamburger />` component just before your `<Navigation />` component in `Header.astro`.
+
+```jsx
+---
+import Navigation from "./Navigation.astro";
+import Hamburger from "./Hamburger.astro";
+---
+
+<header>
+  <nav>
+    <Hamburger />
+    <Navigation />
+  </nav>
+</header>
+```
+
+4. Add the following styles for your Hamburger component:
+
+```css
+/* nav styles */
+/* ADD THE FOLLOWING*/
+.hamburger {
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+/* ADD THE FOLLOWING*/
+.hamburger .line {
+  display: block;
+  width: 40px;
+  height: 5px;
+  margin-bottom: 10px;
+  background-color: #ff9776;
+}
+
+.nav-links {
+  width: 100%;
+  top: 5rem;
+  left: 48px;
+  background-color: #ff9776;
+  display: none;
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover, a:focus {
+  background-color: #ff9776;
+}
+
+.expanded {
+  display: unset;
+}
+
+@media screen and (min-width: 636px) {
+  .nav-links {
+    margin-left: 5em;
+    display: block;
+    position: static;
+    width: auto;
+    background: none;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 15px 20px;
+  }
+
+  /* ADD THE FOLLOWING*/
+  .hamburger {
+    display: none;
+  }
+}
+```
+
+#### Write your first script tag
+
+Your header is not yet **interactive** because it can’t respond to user input, like clicking on the hamburger menu to show or hide the navigation links.
+
+Adding a `<script>` tag provides client-side JavaScript to “listen” for a user event and then respond accordingly.
+
+1. Add the following `<script>` tag to `index.astro`, just before the closing `</body>` tag.
+
+```jsx
+  <Footer />
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('expanded');
+    });
+  </script>
+</body>
+```
+
+2. Check your browser preview again at various sizes, and verify that you have a working navigation menu that is both responsive to screen size and responds to user input on this page.
+
+#### Importing a `.js` file
+
+Instead of writing your JavaScript directly on each page, you can move the contents of your <script> tag into its own .js file in your project.
+
+1. Create `src/scripts/menu.js` (you will have to create a new `/scripts/` folder) and move your JavaScript into it.
+
+```js
+document.querySelector('.hamburger').addEventListener('click', () => {
+  document.querySelector('.nav-links').classList.toggle('expanded');
+});
+```
+
+2. Replace the contents of the `<script>` tag on `index.astro` with the following file import:
+
+```jsx
+  <Footer />
+  <script>
+    import "../scripts/menu.js";
+  </script>
+</body>
+```
+
+3. Check your browser preview again at a smaller size and verify that the hamburger menu still opens and closes your navigation links.
+
+4. Add the same `<script>` with import to your other two pages, `about.astro` and `blog.astro` and verify that you have a responsive, interactive header on each page.
+
+```jsx
+  <Footer />
+  <script>
+    import "../scripts/menu.js";
+  </script>
+</body>
+```
+
+> IMPORTANT: **The JavaScript in a `<script>` tag is sent to the browser**, and is available to run, based on user interactions like refreshing a page or toggling an input.
 
 
 
