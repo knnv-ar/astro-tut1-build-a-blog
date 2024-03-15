@@ -4,7 +4,8 @@
 
 ### 1.1. Prepare your dev environment
 
-> GET READY TO...<br> > &bull; Install any tools that you will use to build your Astro website
+> GET READY TO...<br>
+&bull; Install any tools that you will use to build your Astro website
 
 Get the dev tools you need:
 
@@ -14,7 +15,10 @@ Get the dev tools you need:
 
 ### 1.2. Create your first Astro project
 
-> GET READY TO...<br> > &bull; Run the `create astro` setup wizard to create a new Astro project<br> > &bull; Start the Astro server in development (dev) mode<br> > &bull; View a live preview of your website in your browser
+> GET READY TO...<br>
+&bull; Run the `create astro` setup wizard to create a new Astro project<br>
+&bull; Start the Astro server in development (dev) mode<br>
+&bull; View a live preview of your website in your browser
 
 #### Launch the Astro setup wizard
 
@@ -39,7 +43,8 @@ Get the dev tools you need:
 
 ### 1.3. Write your first line of Astro
 
-> GET READY TO...<br> > &bull; Make your first edit to your new website
+> GET READY TO...<br>
+&bull; Make your first edit to your new website
 
 #### Edit your home page
 
@@ -50,7 +55,8 @@ Replace <s>`<h1>Astro</h1>`</s> with `<h1>My Astro Site</h1>`
 
 ### 1.4. Store your repository online
 
-> GET READY TO...<br> > &bull; Put your project repository online
+> GET READY TO...<br>
+&bull; Put your project repository online
 
 #### Create a repository on GitHub
 
@@ -58,7 +64,9 @@ Replace <s>`<h1>Astro</h1>`</s> with `<h1>My Astro Site</h1>`
 
 ### 1.5. Deploy your site to the web
 
-> GET READY TO...<br> > &bull; Add your GitHub repository as a new Netlify app<br> > &bull; Deploy your Astro site to the web
+> GET READY TO...<br>
+&bull; Add your GitHub repository as a new Netlify app<br>
+&bull; Deploy your Astro site to the web
 
 #### Create a new Netlify site
 
@@ -74,7 +82,10 @@ Replace <s>`<h1>Astro</h1>`</s> with `<h1>My Astro Site</h1>`
 
 ### 2.1. Create your first Astro page
 
-> GET READY TO...<br> > &bull; Create two new pages on your website: About and Blog<br> > &bull; Add navigation links to your pages<br> > &bull; Deploy an updated version of your website to the web<br>
+> GET READY TO...<br>
+&bull; Create two new pages on your website: About and Blog<br>
+&bull; Add navigation links to your pages<br>
+&bull; Deploy an updated version of your website to the web
 
 #### Create a new `.astro` file
 
@@ -136,7 +147,10 @@ Add at the top of pages `index.astro` and `about.astro`:
 
 ### 2.2. Write your first Markdown blog post
 
-> GET READY TO...<br> > &bull; Make a new folder and create a new post<br> > &bull; Write some Markdown content<br> > &bull; Link to your blog posts on your Blog page<br>
+> GET READY TO...<br>
+&bull; Make a new folder and create a new post<br>
+&bull; Write some Markdown content<br>
+&bull; Link to your blog posts on your Blog page
 
 #### Create your first .md file
 
@@ -205,7 +219,10 @@ I will finish the Astro tutorial, and then keep adding more posts. Watch this sp
 
 ### 2.3. Add dynamic content about you
 
-> GET READY TO...<br> > &bull; Define your page title in frontmatter, and use it in your HTML<br> > &bull; Conditionally display HTML elements<br> > &bull; Add some content about you<br>
+> GET READY TO...<br>
+&bull; Define your page title in frontmatter, and use it in your HTML<br>
+&bull; Conditionally display HTML elements<br>
+&bull; Add some content about you
 
 #### Define and use a variable
 
@@ -338,7 +355,7 @@ Using Astro’s own <style></style> tags, you can style items on your page. Addi
 
 2. Add the class name `skill` to the generated `<li>` elements on your About page, so you can style them. Your code should now look like this:
 
-```astro
+```jsx
 <p>My skills are:</p>
 <ul>
   {skills.map((skill) => <li class="skill">{skill}</li>)}
@@ -347,7 +364,7 @@ Using Astro’s own <style></style> tags, you can style items on your page. Addi
 
 3. Add the `skill` class code to your existing style tag:
 
-```astro
+```css
 <style>
   h1 {
     color: purple;
@@ -368,7 +385,7 @@ The Astro `<style>` tag can also reference any variables from your frontmatter s
 
 1. Define a `skillColor` variable by adding it to the frontmatter script of `src/pages/about.astro` like this:
 
-```astro
+```jsx
 ---
 const pageTitle = "About Me";
 
@@ -391,7 +408,7 @@ const skillColor = "navy";
 
 2. Update your existing `<style>` tag below to first define, then use this `skillColor` variable inside double curly braces.
 
-```astro
+```css
 <style define:vars={{skillColor}}>
   h1 {
     color: purple;
@@ -443,7 +460,7 @@ h1 {
 
 3. In `about.astro`, add the following import statement to your frontmatter:
 
-```astro
+```jsx
 ---
 import '../styles/global.css';
 
@@ -468,17 +485,72 @@ const textCase = "uppercase";
 ---
 ```
 
+## 3. Build and design with Astro UI components
 
+## Unit 3 - Components: build and design with Astro UI components
 
+### 3.1 Make a reusable Navigation component
+
+> GET READY TO...<br>
+&bull; Create a new folder for components<br>
+&bull; Build an Astro component to display your navigation links<br>
+&bull; Replace existing HTML with a new, reusable navigation component
+
+#### Create a new `src/components/` folder
+
+To hold .`astro` files that will generate HTML but that will not become new pages on your website, you will need a new folder in your project: `src/components/`.
+
+#### Create a Navigation component
+
+1. Create a new file: `src/components/Navigation.astro`.
+
+2. Copy your links to navigate between pages from the top of any page and paste them into your new file, `Navigation.astro`:
+
+```html
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/blog/">Blog</a>
+```
+
+#### Import and use `Navigation.astro`
+
+1. Go back to `index.astro` and import your new component inside the code fence:
+
+```jsx
+---
+import Navigation from '../components/Navigation.astro';
+---
+```
+
+2. Then below, replace the existing navigation HTML link elements with the new navigation component you just imported:
+
+Replace:
+```html
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/blog/">Blog</a>
+```
+
+With:
+```html
+<Navigation />
+```
+
+3. Check the preview in your browser and notice that it should look exactly the same… and that’s what you want!
+
+Your site contains the same HTML as it did before. But now, those three lines of code are provided by your `<Navigation />` component.
 
 ####
 
 ```astro
 ```
 
+> GET READY TO...<br>
+&bull; x<br>
+&bull; x<br>
+&bull; x
 ---
 
-## 3. Build and design with Astro UI components
 
 ## 4. Save time and energy with reusable page layouts
 
