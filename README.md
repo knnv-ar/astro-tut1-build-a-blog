@@ -532,7 +532,7 @@ const textCase = "uppercase";
 
 ## Unit 3 - Components: build and design with Astro UI components
 
-### 3.1 Make a reusable Navigation component
+### 3.1. Make a reusable Navigation component
 
 > GET READY TO...<br>
 &bull; Create a new folder for components<br>
@@ -1029,7 +1029,7 @@ document.querySelector('.hamburger').addEventListener('click', () => {
 
 > IMPORTANT: **The JavaScript in a `<script>` tag is sent to the browser**, and is available to run, based on user interactions like refreshing a page or toggling an input.
 
-## 4. Save time and energy with reusable page layouts
+## Unit 4 - Layouts: save time and energy with reusable page layouts
 
 Now that you can build with components, it’s time to create some custom layouts!
 
@@ -1177,7 +1177,7 @@ Don’t forget to:
   - CSS rules in a `<style>` tag (e.g. `<h1>` in your About page)
   - `<script>` tags
 
-### 4.2 Create and pass data to a custom blog layout
+### 4.2. Create and pass data to a custom blog layout
 
 > GET READY TO...<br>
 &bull; Create a new blog post layout for your Markdown files<br>
@@ -1244,7 +1244,7 @@ const { frontmatter } = Astro.props;
 <slot />
 ```
 
-### 4.3 Combine layouts to get the best of both worlds
+### 4.3. Combine layouts to get the best of both worlds
 
 Now that you have added a layout to each blog post, it’s time to make your posts look like the rest of the pages on your website!
 
@@ -1299,8 +1299,135 @@ Make sure that:
 
 If you’d like to customize your page template, you can.
 
-CONTINUAR EN: https://docs.astro.build/en/tutorial/5-astro-api/
+## Unit 5 - Astro API
 
+Now that you have some blog posts, it’s time to use Astro’s API to work with your files!
+
+#### Looking ahead
+
+In this unit, you’ll supercharge your blog with an index page, tag pages, and an RSS feed.
+
+Along the way, you’ll learn how to use:
+
+- `Astro.glob()` to access data from files in your project
+- `getStaticPaths()` to create multiple pages (routes) at once
+- The Astro RSS package to create an RSS feed
+
+### 5.1. Create a blog post archive 
+
+Now that you have a few blog posts to link to, it’s time to configure the Blog page to create a list of them automatically!
+
+> GET READY TO...<br>
+&bull; Access data from all your posts at once using `Astro.glob()`<br>
+&bull; Display a dynamically generated list of posts on your Blog page<br>
+&bull; Refactor to use a `<BlogPost />` component for each list item
+
+
+#### Dynamically display a list of posts
+
+1. Add the following code to `blog.astro` to return information about all your Markdown files. `Astro.glob()` will return an array of objects, one for each blog post.
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+const allPosts = await Astro.glob('../pages/posts/*.md');
+const pageTitle = "My Astro Learning Blog";
+---
+<BaseLayout pageTitle={pageTitle}>
+  <p>This is where I will post about my journey learning Astro.</p>
+  <ul>
+    <li><a href="/posts/post-1/">Post 1</a></li>
+    <li><a href="/posts/post-2/">Post 2</a></li>
+    <li><a href="/posts/post-3/">Post 3</a></li>
+  </ul>
+</BaseLayout>
+```
+
+2. To generate the entire list of posts dynamically, using the post titles and URLs, replace your individual `<li>` tags with the following Astro code in `src/pages/blog.astro`:
+
+Replace:
+
+```html
+  <li><a href="/posts/post-1/">Post 1</a></li>
+  <li><a href="/posts/post-2/">Post 2</a></li>
+  <li><a href="/posts/post-3/">Post 3</a></li>
+```
+
+With:
+
+```jsx
+{allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+```
+
+Your entire list of blog posts is now being generated dynamically, by mapping over the array returned by `Astro.glob()`.
+
+3. Add a new blog post by creating a new `post-4.md` file in `src/pages/posts/` and adding some Markdown content. Be sure to include at least the frontmatter properties used below.
+
+```jsx
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: My Fourth Blog Post
+author: Astro Learner
+description: "This post will show up on its own!"
+image:
+    url: "https://docs.astro.build/default-og-image.png"
+    alt: "The word astro against an illustration of planets and stars."
+pubDate: 2022-08-08
+tags: ["astro", "successes"]
+---
+This post should show up with my other blog posts, because `Astro.glob()` is returning a list of all my posts in order to create my list.
+```
+
+4. Revisit your blog page in your browser preview at http://localhost:4321/blog and look for an updated list with four items, including your new blog post!
+
+#### Challenge: Create a BlogPost component
+
+Try on your own to make all the necessary changes to your Astro project so that you can instead use the following code to generate your list of blog posts:
+
+Replace:
+
+```jsx
+<ul>
+  {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+</ul>
+```
+
+
+With:
+
+```jsx
+<ul>
+  {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+</ul>
+```
+
+Solution:
+
+src/components/BlogPost.astro:
+
+```jsx
+---
+const { title, url } = Astro.props
+---
+<li><a href={url}>{title}</a></li>
+```
+
+src/pages/blog.astro
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPost from '../components/BlogPost.astro';
+const allPosts = await Astro.glob('../pages/posts/*.md');
+const pageTitle = "My Astro Learning Blog"
+---
+<BaseLayout pageTitle={pageTitle}>
+  <p>This is where I will post about my journey learning Astro.</p>
+  <ul>
+    {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+  </ul>
+</BaseLayout>
+```
 
 
 #### 
