@@ -540,6 +540,52 @@ With:
 
 Your site contains the same HTML as it did before. But now, those three lines of code are provided by your `<Navigation />` component.
 
+### 3.2. Create a social media footer
+
+> GET READY TO...<br>
+&bull; Create a Footer component<br>
+&bull; Create and pass props to a Social Media component
+
+#### Create a Footer Component
+
+1. Create a new file at the location `src/components/Footer.astro`.
+
+2. Copy the following code into your new file, `Footer.astro`:
+
+```jsx
+---
+const platform = "github";
+const username = "withastro";
+---
+
+<footer>
+  <p>Learn more about my projects on <a href={`https://www.${platform}.com/${username}`}>{platform}</a>!</p>
+</footer>
+```
+
+#### Import and use Footer.astro
+
+
+
+1. Add the following import statement to the frontmatter in each of your three Astro pages (`index.astro`, `about.astro`, and `blog.astro`):
+
+```jsx
+import Footer from '../components/Footer.astro';
+```
+
+2. Add a new `<Footer />` component in your Astro template on each page, just before the closing `</body>` tag to display your footer at the bottom of the page.
+
+```html
+    <Footer />
+  </body>
+</html>
+```
+
+3. In your browser preview, check that you can see your new footer text on each page.
+
+
+
+
 ####
 
 ```astro

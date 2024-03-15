@@ -1,0 +1,23 @@
+---
+const platform = ["GitHub", "Instagram", "Twitter", "LinkedIn"];
+const username = "withastro";
+---
+
+<footer>
+  <p>
+    Learn more about my projects on <a
+      href={`https://www.${platform[0].toLowerCase()}.com/${username}`}
+      >{platform[0]}</a
+    >!
+  </p>
+  <p>
+    Follow me on <a
+      href={`https://www.${platform[1].toLowerCase()}.com/${username}`}
+      >{platform[1]}</a
+    >, <a href={`https://www.${platform[2].toLowerCase()}.com/${username}`}
+      >{platform[2]}</a
+    > and <a href={`https://www.${platform[3].toLowerCase()}.com/${username}`}
+      >{platform[3]}</a
+    >.
+  </p>
+</footer>
