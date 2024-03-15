@@ -1299,7 +1299,7 @@ Make sure that:
 
 If you’d like to customize your page template, you can.
 
-CONTINUAR EN: https://docs.astro.build/en/tutorial/5-astro-api/s
+CONTINUAR EN: https://docs.astro.build/en/tutorial/5-astro-api/
 
 
 
