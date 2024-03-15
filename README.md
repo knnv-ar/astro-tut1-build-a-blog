@@ -688,8 +688,150 @@ import Social from "./Social.astro";
 
 3. Check your browser preview again and confirm that each page shows an updated footer.
 
-```astro
+### 3.3. Build it yourself - Header
+
+> GET READY TO...<br>
+&bull; Create a Header for your site that contains the Navigation component<br>
+&bull; Make the Navigation component responsive
+
+#### Try it yourself - Build a new Header component
+
+1. Create a new Header component. Import and use your existing `Navigation.astro` component inside a `<nav>` element which is inside a `<header>` element.
+
+
+```jsx
+---
+import Navigation from './Navigation.astro';
+---
+<header>
+  <nav>
+    <Navigation />
+  </nav>
+</header>
 ```
+
+#### Try it yourself - Update your pages
+
+1. On each page (`index.astro`, `about.astro` and `blog.astro`), replace your existing `<Navigation/>` component with your new header.
+
+Replace: 
+
+```jsx
+import Navigation from '../components/Navigation.astro';
+```
+
+With:
+
+```jsx
+import Header from '../components/Header.astro';
+```
+
+And replace:
+
+```jsx
+<Navigation />
+```
+
+With:
+
+```jsx
+<Header />
+```
+
+#### Add responsive styles
+
+1. Update `Navigation.astro` with the CSS class to control your navigation links. Wrap the existing navigation links in a ' ' with the class `nav-links`.
+
+```jsx
+---
+---
+<div class="nav-links">
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/blog">Blog</a>
+</div>
+```
+
+2. Copy the CSS styles below into `global.css`. These styles:
+
+    - Style and position the navigation links for mobile
+    - Include an `expanded` class that can be toggled to display or hide the links on mobile
+    - Use a `@media` query to define different styles for larger screen sizes
+
+```css
+html {
+  background-color: #f1f5f9;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
+
+/* nav styles */
+
+.nav-links {
+  width: 100%;
+  top: 5rem;
+  left: 48px;
+  background-color: #ff9776;
+  display: unset;
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #ff9776;
+}
+
+.expanded {
+  display: unset;
+}
+
+@media screen and (min-width: 636px) {
+  .nav-links {
+    margin-left: 5em;
+    display: block;
+    position: static;
+    width: auto;
+    background: none;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 15px 20px;
+  }
+
+}
+```
+
+Resize your window and look for different styles being applied at different screen widths. Your header is now **responsive** to screen size through the use of `@media` queries.
+
+
+
 
 
 ####
