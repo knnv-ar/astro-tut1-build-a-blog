@@ -583,7 +583,113 @@ import Footer from '../components/Footer.astro';
 
 3. In your browser preview, check that you can see your new footer text on each page.
 
+#### Create a Social Media component
 
+Since you might have multiple online accounts you can link to, you can make a single, reusable component and display it multiple times. Each time, you will pass it different properties (`props`) to use: the online platform and your username there.
+
+1. Create a new file at the location `src/components/Social.astro`. 
+
+2. Copy the following code into your new file, `Social.astro`:
+
+```jsx
+---
+const { platform, username } = Astro.props;
+---
+<a href={`https://www.${platform.toLowerCase()}.com/${username}`}>{platform}</a>
+```
+
+#### Import and use `Social.astro` in your Footer
+
+1. Change the code in `src/components/Footer.astro` to import, then use this new component three times, passing different **component attributes** as props each time:
+
+Replace:
+
+```jsx
+const platform = "github";
+const username = "withastro";
+```
+
+With:
+
+```jsx
+import Social from './Social.astro';
+```
+
+and replace:
+
+```jsx
+<p>Learn more about my projects on <a href={`https://www.${platform}.com/${username}`}>{platform}</a>!</p>
+```
+
+With:
+
+```jsx
+  <p>
+    Learn more about my projects on <Social
+      platform="GitHub"
+      username="withastro"
+    />, <Social platform="Twitter" username="astrodotbuild" /> and <Social
+      platform="Youtube"
+      username="astrodotbuild"
+    />.
+  </p>
+```
+
+2. Check your browser preview, and you should see your new footer displaying links to these three platforms on each page.
+
+#### Style your Social Media Component
+
+1. Customize the appearance of your links by adding a `<style>` tag to `src/components/Social.astro`.
+
+```jsx
+---
+const { platform, username } = Astro.props;
+---
+<a href={`https://www.${platform.toLowerCase()}.com/${username}`}>{platform}</a>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>
+```
+
+2. Add a `<style>` tag to `src/components/Footer.astro` to improve the layout of its contents.
+
+```astro
+---
+import Social from "./Social.astro";
+---
+
+<footer>
+  <p>
+    Learn more about my projects on <Social
+      platform="GitHub"
+      username="withastro"
+    />, <Social platform="Twitter" username="astrodotbuild" /> and <Social
+      platform="Youtube"
+      username="astrodotbuild"
+    />.
+  </p>
+</footer>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>
+```
+
+3. Check your browser preview again and confirm that each page shows an updated footer.
+
+```astro
+```
 
 
 ####
