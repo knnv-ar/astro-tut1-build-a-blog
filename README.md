@@ -39,7 +39,18 @@ UNIT 4 - LAYOUTS
 4.2. Create and pass data to a custom blog layout
 4.3. Combine layouts to get the best of both worlds
 
+UNIT 5 - ASTRO API
 
+5.1. Create a blog post archive
+5.2. Generate tag pages
+5.3. Build a tag index page
+5.4. Add an RSS feed
+
+UNIT 6 - ASTRO ISLANDS
+
+6.1. Build your first Astro island
+6.2. Back on dry land. Take your blog from day to night, no island required!
+6.3. Congratulations!
 
 ---
 
@@ -2165,7 +2176,185 @@ Download a feed reader, or sign up for an online feed reader service and subscri
 
 [RSS item generation in Astro](https://docs.astro.build/en/guides/rss/#using-glob-imports)
 
+## Unit 6 - Astro Islands
 
+Now that you have a fully functioning blog, it’s time to add some interactive islands to your site!
+
+#### Looking ahead
+
+In this unit, you’ll use **Astro islands** to bring frontend framework components into your Astro site.
+
+You will:
+
+- Add a UI framework, Preact, to your Astro project
+- Use Preact to create an interactive greeting component
+- Learn when you might not choose islands for interactivity
+
+#### Checklist
+
+[x] I am ready to add some interactivity to my site, and start living that island life!
+
+### 6.1. Build your first Astro island
+
+Use a Preact component to greet your visitors with a randomly-selected welcome message!
+
+> GET READY TO...<br>
+&bull; Add Preact to your Astro project<br>
+&bull; Include Astro islands (Preact `.jsx` components) on your home page<br>
+&bull; Use `client:` directives to make islands interactive
+
+#### Add Preact to your Astro project
+
+1. If it’s running, quit the dev server to have access to the terminal (keyboard shortcut: Ctrl + C).
+
+2. Add the ability to use Preact components in your Astro project with a single command:
+
+```sh
+npx astro add preact
+```
+
+3. Follow the command line instructions to confirm adding Preact to your project.
+
+#### Include a Preact greeting banner
+
+This component will take an array of greeting messages as a prop and randomly select one of them to show as a welcome message. The user can click a button to get a new random message.
+
+1. Create a new file in `src/components/` named `Greeting.jsx`
+
+    Note the `.jsx` file extension. This file will be written in Preact, not Astro.
+
+2. Add the following code to `Greeting.jsx`:
+
+```jsx
+import { useState } from 'preact/hooks';
+
+export default function Greeting({messages}) {
+
+  const randomMessage = () => messages[(Math.floor(Math.random() * messages.length))];
+
+  const [greeting, setGreeting] = useState(messages[0]);
+
+  return (
+    <div>
+      <h3>{greeting}! Thank you for visiting!</h3>
+      <button onClick={() => setGreeting(randomMessage())}>
+        New Greeting
+      </button>
+    </div>
+  );
+}
+```
+
+3. Import and use this component on your Home page `index.astro`.
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Greeting from '../components/Greeting';
+const pageTitle = "Home Page";
+---
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} />
+</BaseLayout>
+```
+
+Check the preview in your browser: you should see a random greeting, but the button won’t work!
+
+4. Add a second `<Greeting />` component with the `client:load` directive.
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Greeting from '../components/Greeting';
+const pageTitle = "Home Page";
+---
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} />
+  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+</BaseLayout>
+```
+
+5. Revisit your page and compare the two components. The second button works because the `client:load` directive tells Astro to send and rerun its JavaScript on the _client_ when the page _loads_, making the component interactive. This is called a **hydrated** component.
+
+6. Once the difference is clear, remove the non-hydrated Greeting component.
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Greeting from '../components/Greeting';
+const pageTitle = "Home Page";
+---
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} />
+  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+</BaseLayout>
+```
+
+#### Analyze the Pattern
+
+There are other `client:` directives to explore. Each sends the JavaScript to the client at a different time. `client:visible`, for example, will only send the component’s JavaScript when it is visible on the page.
+
+Consider an Astro component with the following code:
+
+```jsx
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AstroBanner from '../components/AstroBanner.astro';
+import PreactBanner from '../components/PreactBanner';
+import SvelteCounter from '../components/SvelteCounter.svelte';
+---
+<BaseLayout>
+  <AstroBanner />
+  <PreactBanner />
+  <PreactBanner client:load />
+  <SvelteCounter />
+  <SvelteCounter client:visible />
+</BaseLayout>
+```
+
+1. Which of the five components will be **hydrated** islands, sending JavaScript to the client?
+
+`<PreactBanner client:load />` and `<SvelteCounter client:visible />` will be hydrated islands.
+
+2. In what way(s) will the two `<PreactBanner />` components be the same? In what way(s) will they be different?
+
+**Same**: They both show the same HTML elements and look the same initially.<br>
+**Different**: The component with the `client:load` directive will rerender after the page is loaded, and any interactive elements that it has will work.
+
+3. Assume the `SvelteCounter` component shows a number and has a button to increase it. If you couldn’t see your website’s code, only the live published page, how would you tell which of the two `<SvelteCounter />` components used `client:visible`?
+
+Try clicking the button, and see which one is interactive. If it responds to your input, it must have had a `client:` directive.
+
+#### Test your knowledge
+
+For each of the following components, identify what will be sent to the browser:
+
+1. `<ReactCounter client:load />`
+
+    [] HTML and CSS only
+
+    [x] HTML, CSS, and JavaScript
+
+2. `<SvelteCard />`
+
+    [x] HTML and CSS only
+
+    [] HTML, CSS, and JavaScript
+
+#### Checklist
+
+[x] I can install an Astro integration.
+[x] I can write UI framework components in their own language.
+[x] I can use a `client:` directive for hydration on my UI framework component.
+
+#### Resources
+
+[Astro Integrations Guide](https://docs.astro.build/en/guides/integrations-guide/)
+[Using UI Framework Components in Astro](https://docs.astro.build/en/guides/framework-components/#using-framework-components)
+[Astro client directives reference](https://docs.astro.build/en/reference/directives-reference/#client-directives)
 
 
 ---
@@ -2181,10 +2370,11 @@ Download a feed reader, or sign up for an online feed reader service and subscri
 &bull; x
 
 
+UNIT 6 - ASTRO ISLANDS
 
-Build your first layout
-Create and pass data to a custom blog layout
-Combine layouts to get the best of both worlds
+6.1. Build your first Astro island
+6.2. Back on dry land. Take your blog from day to night, no island required!
+6.3. Congratulations!
 
 
 ---
