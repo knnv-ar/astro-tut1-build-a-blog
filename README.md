@@ -2154,7 +2154,16 @@ npm run preview
 > **View your RSS feed in a reader**<br>
 Download a feed reader, or sign up for an online feed reader service and subscribe to your site by adding your own Netlify URL. You can also share this link with others so they can subscribe to your posts, and be notified when a new one is published.
 
-Be sure to quit the preview and restart the dev server when you want to view your site in development mode again.
+6. Be sure to quit the preview and restart the dev server when you want to view your site in development mode again.
+
+#### Checklist
+
+[x] I can install an Astro package using the command line.
+[x] I can create an RSS feed for my website.
+
+#### Resources
+
+[RSS item generation in Astro](https://docs.astro.build/en/guides/rss/#using-glob-imports)
 
 
 
