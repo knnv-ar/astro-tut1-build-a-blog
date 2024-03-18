@@ -2024,6 +2024,52 @@ Match each file path with a second file path that will create a page at the same
 #### Resources
 [Static Routing in Astro](https://docs.astro.build/en/guides/routing/#static-routes)
 
+### 5.4. Add an RSS feed
+
+> GET READY TO...<br>
+&bull; Install an Astro package for creating an RSS feed for your website<br>
+&bull; Create a feed that can be subscribed to and read by RSS feed readers
+
+#### Install Astro’s RSS package
+
+Astro provides a custom package to quickly add an RSS feed to your website.
+
+This official package generates a non-HTML document with information about all of your blog posts that can be read by **feed readers** like Feedly, The Old Reader, and more. This document is updated every time your site is rebuilt.
+
+Individuals can subscribe to your feed in a feed reader, and receive a notification when you publish a new blog post on your site, making it a popular blog feature.
+
+1. Quit the Astro development server and run the following command in the terminal to install Astro’s RSS package.
+
+```bash
+npm install @astrojs/rss
+```
+
+2. Restart the dev server to begin working on your Astro project again.
+
+```bash
+npm run dev
+```
+
+#### Create an .xml feed document
+
+1. Create a new file in `src/pages/` called `rss.xml.js`
+
+2. Copy the following code into this new document. Customize the `title` and `description` properties, and if necessary, specify a different language in `customData`:
+
+```js
+import rss, { pagesGlobToRssItems } from '@astrojs/rss';
+
+export async function GET(context) {
+  return rss({
+    title: 'Astro Learner | Blog',
+    description: 'My journey learning Astro',
+    site: context.site,
+    items: await pagesGlobToRssItems(import.meta.glob('./**/*.md')),
+    customData: `<language>en-us</language>`,
+  });
+}
+```
+
 
 ---
 
