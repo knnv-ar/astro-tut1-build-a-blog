@@ -2070,6 +2070,94 @@ export async function GET(context) {
 }
 ```
 
+3. Add the `site` property to the Astro config (`astro.config.mjs`) with your site’s own unique Netlify URL.
+
+```jsx
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  site: "https://astro-tut1-build-a-blog.netlify.app/"
+});
+```
+
+4. This `rss.xml` document is only created when your site is built, so you won’t be able to see this page in your browser during development. Quit the dev server and run the following commands to first, build your site locally and then, view a preview of your build:
+
+```sh
+npm run build
+
+npm run preview
+```
+
+5. Visit http://localhost:4321/rss.xml and verify that you can see (unformatted) text on the page with an `item` for each of your `.md` files. Each item should contain blog post information such as `title`, `url`, and `description`.
+
+```xlm
+<rss version="2.0">
+  <channel>
+    <title>Astro Learner | Blog</title>
+    <description>My journey learning Astro</description>
+    <link>https://astro-tut1-build-a-blog.netlify.app/</link>
+    <language>en-us</language>
+    <item>
+      <title>My First Blog Post</title>
+      <link>
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-1/
+      </link>
+      <guid isPermaLink="true">
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-1/
+      </guid>
+      <description>This is the first post of my new Astro blog.</description>
+      <pubDate>Fri, 01 Jul 2022 00:00:00 GMT</pubDate>
+      <author>Astro Learner</author>
+    </item>
+    <item>
+      <title>My Second Blog Post</title>
+      <link>
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-2/
+      </link>
+      <guid isPermaLink="true">
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-2/
+      </guid>
+      <description>After learning some Astro, I couldn't stop!</description>
+      <pubDate>Fri, 08 Jul 2022 00:00:00 GMT</pubDate>
+      <author>Astro Learner</author>
+    </item>
+    <item>
+      <title>My Third Blog Post</title>
+      <link>
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-3/
+      </link>
+      <guid isPermaLink="true">
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-3/
+      </guid>
+      <description>
+        I had some challenges, but asking in the community really helped!
+      </description>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 GMT</pubDate>
+      <author>Astro Learner</author>
+    </item>
+    <item>
+      <title>My Fourth Blog Post</title>
+      <link>
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-4/
+      </link>
+      <guid isPermaLink="true">
+        https://astro-tut1-build-a-blog.netlify.app/posts/post-4/
+      </guid>
+      <description>This post will show up on its own!</description>
+      <pubDate>Mon, 08 Aug 2022 00:00:00 GMT</pubDate>
+      <author>Astro Learner</author>
+    </item>
+  </channel>
+</rss>
+```
+
+> **View your RSS feed in a reader**<br>
+Download a feed reader, or sign up for an online feed reader service and subscribe to your site by adding your own Netlify URL. You can also share this link with others so they can subscribe to your posts, and be notified when a new one is published.
+
+Be sure to quit the preview and restart the dev server when you want to view your site in development mode again.
+
+
+
 
 ---
 
